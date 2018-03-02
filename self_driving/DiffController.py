@@ -61,7 +61,9 @@ class DiffController():
                  bluetooth,
                  debug):
         assert mode == "pure" or mode == "green" or mode == "bin" or mode == "gray"  # noqa
-        self.robot = DiffCar(bluetooth=bluetooth)
+        self.robot = DiffCar(bluetooth=bluetooth,
+                             tacho_left=1000,
+                             tacho_right=1000)
         self.cam = Camera(mode=mode,
                           debug=debug,
                           resize=resize / 100.0)
@@ -157,9 +159,6 @@ class DiffController():
                 if command == 'up':
                     self.robot.move_up()
                     time.sleep(0.05)
-                elif command == 'down':
-                    self.robot.move_down()
-                    time.sleep(0.05)
                 elif command == 'left':
                     self.robot.move_left()
                 elif command == 'right':
@@ -205,9 +204,6 @@ class DiffController():
                 write_img(original_img, commands_prob, name)
                 if command == 'up':
                     self.robot.move_up()
-                    time.sleep(0.05)
-                elif command == 'down':
-                    self.robot.move_down()
                     time.sleep(0.05)
                 elif command == 'left':
                     self.robot.move_left()
